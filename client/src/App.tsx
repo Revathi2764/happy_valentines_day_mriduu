@@ -16,7 +16,7 @@ import { PageTransition } from "@/components/PageTransition";
 import Landing from "@/pages/Landing";
 import Story from "@/pages/Story";
 import Memories from "@/pages/Memories";
-import Surprise from "@/pages/Surprise";
+
 import FinalNote from "@/pages/FinalNote";
 import NotFound from "@/pages/not-found";
 import { MusicPlayer } from "./components/MusicPlayer";
@@ -42,11 +42,7 @@ function AnimatedRoutes() {
             <Memories />
           </PageTransition>
         </Route>
-        <Route path="/surprise">
-          <PageTransition>
-            <Surprise />
-          </PageTransition>
-        </Route>
+      
         <Route path="/final">
           <PageTransition>
             <FinalNote />

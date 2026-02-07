@@ -1,338 +1,113 @@
 import { useMemories } from "@/hooks/use-memories";
 import { PolaroidCard } from "@/components/PolaroidCard";
-import { Loader2, Heart, Sparkles, ArrowRight } from "lucide-react";
+import { Loader2, Heart, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { useEffect, memo } from "react";
 
-// Memoized loading spinner
+// Loading Spinner
 const LoadingSpinner = memo(() => (
   <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50">
     <motion.div
-      animate={{
-        scale: [1, 1.15, 1],
-        rotate: [0, 360],
-      }}
-      transition={{
-        duration: 2,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      className="will-change-transform"
+      animate={{ scale: [1, 1.15, 1], rotate: [0, 360] }}
+      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
     >
-      <Loader2 className="w-10 h-10 sm:w-12 sm:h-12 text-pink-400" />
+      <Loader2 className="w-12 h-12 text-pink-400" />
     </motion.div>
     <motion.p
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.4 }}
-      className="mt-4 sm:mt-6 font-handwriting text-lg sm:text-xl text-pink-600"
+      className="mt-6 font-arial text-xl text-pink-600"
     >
       Loading our precious moments...
     </motion.p>
   </div>
 ));
-
 LoadingSpinner.displayName = "LoadingSpinner";
 
-// Memoized decorative sparkle
+// Decorative Sparkles
 const DecorativeSparkle = memo(({ delay, index }: { delay: number; index: number }) => (
   <motion.div
-    className="absolute will-change-transform pointer-events-none"
+    className="absolute pointer-events-none"
     style={{
       left: `${15 + index * 20}%`,
       top: `${10 + (index % 3) * 25}%`,
     }}
-    animate={{
-      y: [0, -15, 0],
-      opacity: [0.15, 0.3, 0.15],
-      scale: [0.9, 1, 0.9],
-    }}
-    transition={{
-      duration: 3 + delay,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
+    animate={{ y: [0, -15, 0], opacity: [0.15, 0.3, 0.15], scale: [0.9, 1, 0.9] }}
+    transition={{ duration: 3 + delay, repeat: Infinity, ease: "easeInOut" }}
   >
-    <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-pink-400/40" />
+    <Sparkles className="w-4 h-4 text-pink-400/40" />
   </motion.div>
 ));
-
 DecorativeSparkle.displayName = "DecorativeSparkle";
 
 export default function Memories() {
   const { data: memories, isLoading } = useMemories();
 
-  // Instant scroll reset
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+  if (isLoading) return <LoadingSpinner />;
 
-  // Placeholder data if empty
-  const displayMemories = (memories && memories.length > 0) ? memories : [
-    {
-      id: 1,
-      url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80",
-      type: "image",
-      caption: "The way you smile",
-      date: "Always",
-      rotation: -2
-    },
-    {
-      id: 2,
-      url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&q=80",
-      type: "image",
-      caption: "Beautiful moments",
-      date: "Spring 2023",
-      rotation: 3
-    },
-    {
-      id: 3,
-      url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&q=80",
-      type: "image",
-      caption: "Never letting go",
-      date: "Forever",
-      rotation: -4
-    },
-    {
-      id: 4,
-      url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800&q=80",
-      type: "image",
-      caption: "Chasing sunsets",
-      date: "Summer Vacation",
-      rotation: 2
-    },
-    {
-      id: 5,
-      url: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=800&q=80",
-      type: "image",
-      caption: "Surprises",
-      date: "Your Birthday",
-      rotation: 5
-    },
-    {
-      id: 6,
-      url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80",
-      type: "image",
-      caption: "Coffee dates",
-      date: "Every Weekend",
-      rotation: -3
-    }
-  ];
+  const displayMemories =
+    memories && memories.length > 0
+      ? memories
+      : [
+          { id: 1, url: "/naturals.jpg", type: "image", caption: "The way you smile",  rotation: -2 },
+          { id: 2, url: "/arabian.jpg", type: "image", caption: "Beautiful moments",  rotation: 3 },
+          { id: 3, url: "/car.jpg", type: "image", caption: "Never letting go", rotation: -4 },
+          { id: 4, url: "/kiss.jpg", type: "image", caption: "Craving for each other", rotation: 2 },
+          { id: 5, url: "/call1 edited.jpg", type: "image", caption: "Holding on", rotation: 5 },
+          { id: 6, url: "/hi lite mall.jpg", type: "image", caption: "Making time for us", rotation: -3 },
+        ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 relative overflow-hidden">
-      {/* Simplified background effects */}
+    <div className="relative min-h-screen bg-white overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-200/20 via-transparent to-transparent pointer-events-none" />
-      
-      {/* Single optimized glow */}
+
       <motion.div
-        animate={{ 
-          scale: [1, 1.1, 1],
-          opacity: [0.1, 0.18, 0.1],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] bg-gradient-to-r from-pink-300/25 to-purple-300/25 rounded-full blur-[100px] will-change-transform"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.18, 0.1] }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-gradient-to-r from-pink-300/25 to-purple-300/25 rounded-full blur-[100px]"
       />
 
-      {/* Reduced floating sparkles - only 4 */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(4)].map((_, i) => (
           <DecorativeSparkle key={i} delay={i * 0.5} index={i} />
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-12 sm:mb-16 lg:mb-20"
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-20">
+        <motion.h1
+          className="text-center text-5xl font-arial leading-[1.3] text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 mb-16"
         >
-          {/* Top decorative element - simplified */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="will-change-transform"
-            >
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400/70" />
-            </motion.div>
-            <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent via-pink-400/60 to-transparent" />
-            <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-rose-500 fill-rose-400" />
-            <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-transparent via-pink-400/60 to-transparent" />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="will-change-transform"
-            >
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400/70" />
-            </motion.div>
-          </motion.div>
+          Our Memory Lane
+        </motion.h1>
 
-          {/* Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="space-y-3 sm:space-y-4"
-          >
-            <motion.h1
-              animate={{
-                textShadow: [
-                  "0 0 15px rgba(244, 114, 182, 0.1)",
-                  "0 0 22px rgba(244, 114, 182, 0.15)",
-                  "0 0 15px rgba(244, 114, 182, 0.1)",
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 leading-tight px-4"
-            >
-              Our Memory Lane
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 font-serif italic max-w-2xl mx-auto px-4"
-            >
-              Captured moments that tell our beautiful story
-            </motion.p>
-          </motion.div>
-
-          {/* Simplified heart decoration - only 3 hearts */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex items-center justify-center gap-2 mt-6 sm:mt-8"
-          >
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                animate={{
-                  y: [0, -8, 0],
-                  opacity: [0.3, 0.55, 0.3],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.3,
-                }}
-                className="will-change-transform"
-              >
-                <Heart className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-pink-400/50 fill-pink-300/50" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.header>
-
-        {/* Optimized Memory Grid - mobile-first responsive */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 mb-16 sm:mb-20 lg:mb-24"
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-24">
           {displayMemories.map((memory, index) => (
-            <motion.div
-              key={memory.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "100px", amount: 0.1 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
-            >
-              <PolaroidCard memory={memory} index={index} />
-            </motion.div>
+            <PolaroidCard key={memory.id} memory={memory} index={index} />
           ))}
-        </motion.div>
+        </div>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "100px" }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col items-center justify-center py-12 sm:py-16 relative"
-        >
-          {/* Simplified background glow */}
-          <motion.div
-            animate={{
-              scale: [1, 1.08, 1],
-              opacity: [0.1, 0.18, 0.1],
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="absolute inset-0 flex items-center justify-center"
-          >
-            <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-gradient-to-br from-pink-300/20 to-purple-300/20 rounded-full blur-[60px]" />
-          </motion.div>
+        {/* Final Letter Section */}
+        <motion.div className="flex flex-col items-center justify-center py-16 text-center">
 
-          {/* Content */}
-          <div className="relative z-10 space-y-6 sm:space-y-8 text-center">
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="font-handwriting text-lg sm:text-xl md:text-2xl text-pink-600 px-4"
+          <Link href="/final">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className="px-10 py-4 bg-gradient-to-r from-rose-400 via-pink-500 to-rose-500 text-white rounded-full font-serif shadow-xl shadow-pink-300/40"
             >
-              Ready for the grand finale?
-            </motion.p>
+              Read My Letter
+            </motion.button>
+          </Link>
 
-            <Link href="/surprise">
-              <motion.button
-                whileHover={{ scale: 1.03, y: -3 }}
-                whileTap={{ scale: 0.97 }}
-                className="group relative px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-white rounded-full font-serif text-sm sm:text-base md:text-lg shadow-xl shadow-pink-300/40 overflow-hidden will-change-transform touch-manipulation"
-              >
-                {/* Simplified glow */}
-                <motion.div
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.4, 0, 0.4],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute inset-0 bg-white/20 rounded-full"
-                />
-
-                <span className="relative flex items-center gap-2 sm:gap-3">
-                  Continue the Journey
-                  <motion.div
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="will-change-transform"
-                  >
-                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </motion.div>
-                </span>
-              </motion.button>
-            </Link>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-xs sm:text-sm md:text-base text-gray-500 italic px-4"
-            >
-              The best is yet to come ♡
-            </motion.p>
-          </div>
+          <p className="text-sm text-gray-500 italic mt-4">
+            Something that came to my mind ♡
+          </p>
         </motion.div>
       </div>
     </div>

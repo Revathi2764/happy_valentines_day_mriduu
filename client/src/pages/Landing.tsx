@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
-import { Heart, Sparkles } from "lucide-react";
+import { Diamond, Heart, Sparkles } from "lucide-react";
 import { useLocation } from "wouter";
 import { useAudio } from "@/hooks/use-audio";
 import { useConfig } from "@/hooks/use-config";
@@ -97,21 +97,15 @@ export default function Landing() {
 
   return (
     <div 
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 px-4"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white px-4"
+
+
       onMouseMove={handleMouseMove}
     >
       {/* Simplified background - single gradient layer */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pink-200/20 via-transparent to-transparent" />
       
-      {/* Optimized glowing aura - reduced to 1 layer with lower blur */}
-      <motion.div
-        animate={{ 
-          scale: [1, 1.15, 1],
-          opacity: [0.15, 0.25, 0.15],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] bg-gradient-to-r from-pink-300/30 to-purple-300/30 rounded-full blur-[80px] will-change-transform"
-      />
+      
 
       {/* Reduced floating hearts - only 5 instead of 8 */}
       <div className="absolute inset-0 pointer-events-none">
@@ -156,7 +150,7 @@ export default function Landing() {
             <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-pink-400/70" />
           </motion.div>
           <DecorativeLine />
-          <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-rose-400 fill-rose-300/50" />
+          <Heart className="w-3 h-3 sm:w-4 sm:h-4 text-pink-400 fill-pink-300/50" />
           <DecorativeLine />
           <motion.div
             animate={{ rotate: -360 }}
@@ -175,11 +169,11 @@ export default function Landing() {
           className="space-y-4 sm:space-y-6"
         >
           <motion.span 
-            className="font-handwriting text-lg sm:text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-purple-500 block leading-relaxed px-4"
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-arial text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 leading-tight px-4"
             animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
           >
-            I've been carrying this in my heart for so long…
+            HAPPY VALENTINE'S DAY 🤍💜
           </motion.span>
 
           <motion.div
@@ -192,7 +186,7 @@ export default function Landing() {
             }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-rose-600 via-pink-600 to-purple-600 tracking-tight leading-tight px-2">
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-pink-600 via-pink-600 to-pink-500 tracking-tight leading-tight px-2">
               {isLoading ? (
                 <motion.span
                   animate={{ opacity: [0.3, 1, 0.3] }}
@@ -206,18 +200,7 @@ export default function Landing() {
             </h1>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="space-y-2"
-          >
-            <p className="text-sm sm:text-base md:text-lg text-rose-700/80 font-light italic leading-relaxed px-4">
-              Every moment since you walked into my life,
-              <br />
-              <span className="text-pink-600/90">the universe feels a little more magical.</span>
-            </p>
-          </motion.div>
+          
         </motion.div>
 
         {/* Interactive heart button - touch-friendly sizing */}
@@ -250,7 +233,7 @@ export default function Landing() {
             )}
 
             {/* Main button - larger touch target for mobile */}
-            <div className="relative z-10 bg-gradient-to-br from-white via-pink-50 to-white p-8 sm:p-10 rounded-full shadow-xl shadow-pink-300/40 border-3 sm:border-4 border-pink-200 group-hover:border-rose-300 transition-all duration-500">
+            <div className="relative z-10 bg-gradient-to-br from-white to-white p-8 sm:p-10 rounded-full shadow-xl sm:border-4 border-white-200 transition-all duration-500">
               <motion.div
                 animate={{ 
                   scale: isHovering ? [1, 1.12, 1] : [1, 1.04, 1]
@@ -262,32 +245,33 @@ export default function Landing() {
                 }}
                 className="will-change-transform"
               >
-                <Heart
-                  className="w-16 h-16 sm:w-20 sm:h-20 text-rose-500 fill-pink-200 group-hover:fill-rose-400 transition-all duration-500"
-                  strokeWidth={1.8}
-                />
+                <motion.button
+                onClick={handleStart}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                disabled={isNavigating}
+                className="text-pink-700 text-lg sm:text-xl italic"
+                aria-label="Start the journey"
+              >
+                <span className="flex items-center gap-2">
+                  Yes, this is for you
+                  <Heart className="text-pink-700/80 text-xs sm:text-sm italic" />
+                </span>
+              </motion.button>
+
               </motion.div>
             </div>
 
             {/* Single pulse ring for performance */}
             <motion.span 
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400/20 to-rose-400/20 will-change-transform"
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-700/80 to-pink-700/80 will-change-transform"
               animate={{ scale: [1, 1.4], opacity: [0.4, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
             />
           </motion.button>
 
-          {/* Hover message */}
-          {isHovering && (
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="absolute -bottom-12 sm:-bottom-16 left-1/2 -translate-x-1/2 text-rose-600 font-handwriting text-lg sm:text-xl whitespace-nowrap"
-            >
-              Yes, this is for you ♡
-            </motion.p>
-          )}
+        
+          
         </motion.div>
 
         {/* Bottom whisper text */}
@@ -297,15 +281,8 @@ export default function Landing() {
           transition={{ duration: 1.5 }}
           className="space-y-2 sm:space-y-3"
         >
-          <motion.p
-            animate={{ opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            className="text-rose-600/80 font-handwriting text-base sm:text-lg"
-          >
-            Click the heart when you're ready…
-          </motion.p>
           
-          <p className="text-pink-500/60 text-xs sm:text-sm italic">
+          <p className="text-pink-700/80 text-xs sm:text-sm italic">
             (Some feelings are too precious to rush)
           </p>
         </motion.div>
@@ -318,6 +295,8 @@ export default function Landing() {
           className="flex items-center gap-2"
         >
           <div className="h-px w-6 sm:w-8 bg-gradient-to-r from-transparent to-pink-300/50" />
+          <Heart className="w-2 h-2 sm:w-3 sm:h-3 text-pink-400/60 fill-pink-300/40" />
+          <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-pink-300/50 via-pink-300/50 to-pink-300/50" />
           <Heart className="w-2 h-2 sm:w-3 sm:h-3 text-pink-400/60 fill-pink-300/40" />
           <div className="h-px w-12 sm:w-16 bg-gradient-to-r from-pink-300/50 via-rose-300/50 to-pink-300/50" />
           <Heart className="w-2 h-2 sm:w-3 sm:h-3 text-rose-400/60 fill-rose-300/40" />

@@ -87,16 +87,7 @@ const StorySection = memo(({
           transition={{ duration: 0.7, delay: 0.1 }}
           className={cn("space-y-4 sm:space-y-6", !isEven && "md:col-start-2")}
         >
-          {/* Chapter Badge */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={isInView ? { scale: 1 } : { scale: 0 }}
-            transition={{ duration: 0.4, delay: 0.3, type: "spring", stiffness: 200 }}
-            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full text-rose-600 font-handwriting text-sm md:text-base shadow-sm border border-pink-200/50"
-          >
-            <Heart className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-rose-400" />
-            Chapter {index + 1} of {total}
-          </motion.div>
+         
 
           {/* Title */}
           <motion.h2
@@ -143,7 +134,7 @@ const StorySection = memo(({
           initial={{ opacity: 0, x: isEven ? 40 : -40 }}
           animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? 40 : -40 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className={cn("relative group w-full", !isEven && "md:col-start-1")}
+          className={cn("relative group w-full max-w-md mx-auto", !isEven && "md:col-start-1")}
           onMouseEnter={() => setIsImageHovered(true)}
           onMouseLeave={() => setIsImageHovered(false)}
         >
@@ -171,13 +162,13 @@ const StorySection = memo(({
               y: isImageHovered ? -6 : 0,
             }}
             transition={{ duration: 0.4 }}
-            className="relative bg-white p-2 sm:p-3 rounded-2xl sm:rounded-3xl shadow-xl border-2 border-white overflow-hidden aspect-[4/3] will-change-transform"
+            className="relative bg-white p-2 sm:p-3 rounded-2xl sm:rounded-3xl shadow-xl border-2 border-white overflow-hidden aspect-auto will-change-transform"
           >
             {item.imageUrl ? (
               <motion.img
                 src={item.imageUrl}
                 alt={item.title}
-                className="w-full h-full object-cover rounded-xl sm:rounded-2xl"
+                className="w-full h-auto object-contain rounded-xl sm:rounded-2xl"
                 animate={{
                   scale: isImageHovered ? 1.03 : 1,
                 }}
@@ -220,28 +211,29 @@ export default function Story() {
     {
       id: 1,
       title: "The First Glance",
-      content: "From the moment our eyes met, I knew there was something extraordinary about you. Time seemed to stand still, and in that instant, everything changed.",
-      imageUrl: "https://images.unsplash.com/photo-1627964464837-6328f5931576?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y291cGxlc3xlbnwwfHwwfHx8MA%3D%3D",
+      content: "We never imagined the first glance that happened years back will lead us to this .Seeing this picture first even before meeting making us realise again that we should have been together way before.",
+      imageUrl: "/Gemini_normal.png",
       order: 1
     },
     {
       id: 2,
       title: "Growing Closer",
-      content: "Every conversation, every shared laugh, every quiet moment together brought us closer. I found myself looking forward to seeing you, thinking about you constantly.",
-      imageUrl: "https://images.unsplash.com/photo-1501901609772-df0848060b33?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y291cGxlc3xlbnwwfHwwfHx8MA%3D%3D",
+      content: "Every conversation, every shared laugh, every fight, every quiet moment together brought us closer. I found myself looking forward to seeing you, thinking about you constantly.",
+      imageUrl: "/hi lite normal.jpg",
       order: 2
     },
     {
       id: 3,
       title: "Falling Deeper",
-      content: "Somewhere along the way, friendship blossomed into something more. My heart would race at the sound of your voice, and your smile became my favorite sight.",
-      imageUrl: "https://images.unsplash.com/photo-1555689070-b25ef81cc3ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGNvdXBsZXN8ZW58MHx8MHx8fDA%3D",
+      content: "I have no answer to why I love you , but if I am sure of something then it is that my eyes will always seek and  admire you with this same excitement .",
+      imageUrl: "/eyes.jpg",
       order: 3
     },
   ];
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50 overflow-hidden">
+    <div className="relative min-h-screen bg-white overflow-hidden">
+
       {/* Simplified background gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-pink-100/30 via-transparent to-transparent pointer-events-none" />
 
@@ -299,15 +291,15 @@ export default function Story() {
             <motion.h1
               animate={{
                 textShadow: [
-                  "0 0 15px rgba(244, 114, 182, 0.08)",
-                  "0 0 20px rgba(244, 114, 182, 0.12)",
-                  "0 0 15px rgba(244, 114, 182, 0.08)",
-                ],
+                "0 0 15px rgba(244, 114, 182, 0.08)",
+                "0 0 20px rgba(244, 114, 182, 0.12)",
+                "0 0 15px rgba(244, 114, 182, 0.08)",
+              ],
               }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-handwriting text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 leading-tight px-4"
+              className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-arial text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-pink-600 to-purple-600 leading-tight px-4"
             >
-              Our Journey
+              The Two of Us
             </motion.h1>
 
             <motion.p
@@ -381,21 +373,12 @@ export default function Story() {
 
           {/* Content */}
           <div className="relative z-10 space-y-6 sm:space-y-8 text-center">
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="font-handwriting text-lg sm:text-xl md:text-2xl mb-3 text-pink-600"
-            >
-              But wait, there's more to our story...
-            </motion.p>
 
             <Link href="/memories">
               <motion.button
                 whileHover={{ scale: 1.03, y: -3 }}
                 whileTap={{ scale: 0.97 }}
-                className="group relative px-6 sm:px-8 md:px-12 py-3 sm:py-4 md:py-5 bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 text-white rounded-full font-serif text-sm sm:text-base md:text-lg shadow-xl shadow-pink-300/40 overflow-hidden will-change-transform touch-manipulation"
+                className="px-10 py-4 bg-gradient-to-r from-rose-400 via-pink-500 to-rose-500 text-white rounded-full font-serif shadow-xl shadow-pink-300/40"
               >
                 {/* Simplified button glow */}
                 <motion.div
@@ -427,7 +410,7 @@ export default function Story() {
               transition={{ duration: 0.7, delay: 0.3 }}
               className="text-xs sm:text-sm md:text-base text-gray-500 italic"
             >
-              Every picture tells a thousand words of love
+              Every picture holds lot of emotions right ♡
             </motion.p>
           </div>
         </motion.div>

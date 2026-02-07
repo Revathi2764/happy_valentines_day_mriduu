@@ -8,7 +8,6 @@ export function Navigation() {
   const links = [
     { href: "/story", label: "Our Story" },
     { href: "/memories", label: "Memories" },
-    { href: "/surprise", label: "Surprise" },
     { href: "/final", label: "For You" },
   ];
 

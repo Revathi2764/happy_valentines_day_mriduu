@@ -25,7 +25,7 @@ const LoadingScreen = memo(() => (
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 0.4 }}
-      className="mt-4 sm:mt-6 font-handwriting text-lg sm:text-xl text-pink-600"
+      className="mt-4 sm:mt-6 font-arial text-lg sm:text-xl text-pink-600"
     >
       Preparing something special for you...
     </motion.p>
@@ -67,7 +67,7 @@ export default function FinalNote() {
     window.scrollTo({ top: 0, behavior: "instant" });
   }, []);
 
-  const fullText = "Loving you is not something I do—it's who I am. In every breath, every silence, every tomorrow, it's you. Happy Valentine's Day to the one my heart chose long before I ever understood love.";
+  const fullText = "   This Definitely seems cliche , please bare with me .No matter how much we annoy eachother I have no idea why I choose to keep on loving you everytime. Its better that way I guess. I just want us to be the calm in our chaos, a hand to hold on when life gets harder and a shoulder to lean on when life becomes calm. Cheers to more fights yet hold on tight to eachother. Happy Valentine's Day to the one my heart chose long before I ever understood love.";
 
   // Optimized typing effect
   useEffect(() => {
@@ -95,7 +95,8 @@ export default function FinalNote() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-br from-amber-50 via-rose-50 to-pink-50">
+    <div className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-white">
+
       {/* Simplified background decorative elements */}
       <div className="fixed inset-0 pointer-events-none">
         {/* Single soft vintage glow */}
@@ -105,7 +106,7 @@ export default function FinalNote() {
             opacity: [0.05, 0.1, 0.05],
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/3 left-1/3 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 bg-rose-300 rounded-full blur-[100px] will-change-transform"
+          className="absolute top-1/3 left-1/3 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 justify-center bg-rose-300 rounded-full blur-[100px] will-change-transform"
         />
 
         {/* Reduced floating vintage elements - only 5 */}
@@ -153,8 +154,8 @@ export default function FinalNote() {
                 <Feather className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600/50" />
               </motion.div>
 
-              <h1 className="font-handwriting text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-rose-600 to-pink-600">
-                My Dearest {name || "Love"}
+              <h1 className="font-arial text-2xl sm:text-3xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-rose-600 to-pink-600 italic ">
+                 Dear {name || "Mridul"}
               </h1>
 
               <div className="flex items-center justify-center gap-2">
@@ -171,7 +172,7 @@ export default function FinalNote() {
               transition={{ delay: 0.6, duration: 0.7 }}
               className="relative"
             >
-              <p className="font-serif text-base sm:text-lg md:text-xl lg:text-2xl text-gray-800 leading-relaxed sm:leading-loose text-center px-2 sm:px-4">
+              <p className="font-arial text-base sm:text-lg md:text-xl lg:text-xl text-gray-800 leading-relaxed sm:leading-loose text-center px-2 sm:px-4 italic ">
                 {displayedText}
                 {!isTypingComplete && (
                   <motion.span
@@ -210,9 +211,14 @@ export default function FinalNote() {
                 ))}
               </div>
 
-              <p className="font-handwriting text-xl sm:text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-pink-600">
-                Forever Yours
+              <p className="font-arial text-xl sm:text-xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-600 italic">
+                Forever Your
               </p>
+              <p className="font-serif italic text-sm sm:text-base md:text-lg text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-400 mt-2">
+               
+                School time sweetheart ✨
+              </p>
+
 
               <motion.div
                 animate={{
@@ -260,7 +266,7 @@ export default function FinalNote() {
           <motion.p
             animate={{ opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 2.5, repeat: Infinity }}
-            className="font-handwriting text-base sm:text-lg md:text-xl text-pink-600"
+            className="font-arial text-base sm:text-lg md:text-xl text-pink-600"
           >
             Happy Valentine's Day ♡
           </motion.p>

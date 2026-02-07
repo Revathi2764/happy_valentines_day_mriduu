@@ -14,46 +14,59 @@ interface AudioContextType {
 
 const AudioContext = createContext<AudioContextType | null>(null);
 
-const DEFAULT_AUDIO_SRC = "/Dooron_Dooron.webm";
+const YOUTUBE_VIDEO_ID = "OLC-1ubtd-4";
 
 export function AudioProvider({ children }: { children: ReactNode }) {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const playerRef = useRef<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Load YouTube API
   useEffect(() => {
-    const audio = new Audio(DEFAULT_AUDIO_SRC);
-    audio.loop = true;
-    audio.volume = 0.4;
-    audio.preload = "auto";
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
 
-    audio.addEventListener("play", () => setIsPlaying(true));
-    audio.addEventListener("pause", () => setIsPlaying(false));
-
-    audioRef.current = audio;
-
-    return () => {
-      audio.pause();
-      audioRef.current = null;
+    (window as any).onYouTubeIframeAPIReady = () => {
+      playerRef.current = new (window as any).YT.Player("youtube-player", {
+        height: "0",
+        width: "0",
+        videoId: YOUTUBE_VIDEO_ID,
+        playerVars: {
+          autoplay: 0,
+          loop: 1,
+          playlist: YOUTUBE_VIDEO_ID,
+        },
+        events: {
+          onStateChange: (event: any) => {
+            if (event.data === 1) setIsPlaying(true);
+            if (event.data === 2) setIsPlaying(false);
+          },
+        },
+      });
     };
   }, []);
 
-  const toggle = async () => {
-    if (!audioRef.current) return;
+  const toggle = () => {
+    if (!playerRef.current) return;
 
-    try {
-      if (audioRef.current.paused) {
-        await audioRef.current.play(); // 👈 first click pe hi chalega
-      } else {
-        audioRef.current.pause();
-      }
-    } catch (err) {
-      console.log("Autoplay blocked:", err);
+    const state = playerRef.current.getPlayerState();
+
+    if (state !== 1) {
+      playerRef.current.playVideo();
+    } else {
+      playerRef.current.pauseVideo();
     }
   };
 
   return (
     <AudioContext.Provider value={{ isPlaying, toggle }}>
       {children}
+
+      {/* Hidden YouTube Player */}
+      <div
+        id="youtube-player"
+        style={{ position: "fixed", width: 0, height: 0, opacity: 0 }}
+      />
     </AudioContext.Provider>
   );
 }

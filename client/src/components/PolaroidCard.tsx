@@ -33,12 +33,12 @@ export function PolaroidCard({ memory, index }: PolaroidCardProps) {
         />
       </div>
       
-      <div className="absolute bottom-4 left-0 right-0 text-center px-4">
-        <p className="font-handwriting text-xl text-gray-700 leading-tight">
+      <div className="absolute bottom-7 left-0 right-0 text-center px-4">
+        <p className="font-serif text-l text-gray-700 mt-1 italic">
           {memory.caption}
         </p>
         {memory.date && (
-          <p className="font-serif text-xs text-gray-400 mt-1 italic">{memory.date}</p>
+          <p className="font-serif text-xs text-gray-400 mt-3 italic">{memory.date}</p>
         )}
       </div>
       
