@@ -225,7 +225,7 @@ export default function Story() {
     {
       id: 3,
       title: "Falling Deeper",
-      content: "I have no answer to why I love you , but if I am sure of something then it is that my eyes will always seek and  admire you with this same excitement .",
+      content: "I have no answer to why I love you Mridu , but if I am sure of something then it is that my eyes will always seek and  admire you with this same excitement .",
       imageUrl: "/eyes.jpg",
       order: 3
     },

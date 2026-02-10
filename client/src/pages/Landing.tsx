@@ -187,16 +187,7 @@ export default function Landing() {
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-pink-600 via-pink-600 to-pink-500 tracking-tight leading-tight px-2">
-              {isLoading ? (
-                <motion.span
-                  animate={{ opacity: [0.3, 1, 0.3] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  …
-                </motion.span>
-              ) : (
-                name
-              )}
+            MRIDUU
             </h1>
           </motion.div>
 
@@ -220,17 +211,7 @@ export default function Landing() {
             className="relative group cursor-pointer will-change-transform touch-manipulation"
             aria-label="Start the journey"
           >
-            {/* Simplified glow rings */}
-            {isHovering && (
-              <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400/30 to-rose-400/30 will-change-transform"
-                animate={{ 
-                  scale: [1, 1.4, 1],
-                  opacity: [0.5, 0, 0.5]
-                }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              />
-            )}
+           
 
             {/* Main button - larger touch target for mobile */}
             <div className="relative z-10 bg-gradient-to-br from-white to-white p-8 sm:p-10 rounded-full shadow-xl sm:border-4 border-white-200 transition-all duration-500">
